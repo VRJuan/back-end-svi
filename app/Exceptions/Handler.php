@@ -43,5 +43,15 @@ class Handler extends ExceptionHandler
                 ], 404);
             }
         });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/categorias/*')) {
+                $id = $request->route('categoria');
+                return response()->json([
+                    "status" => false,
+                    "message" => "No la existe la categoria con el id: $id"
+                ], 404);
+            }
+        });
     }
 }
