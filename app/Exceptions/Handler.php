@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -23,8 +25,23 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/cargos/*')) {
+                $id = $request->route('cargo');
+                return response()->json([
+                    "status" => false,
+                    "message" => "No existe el cargo con id: $id"
+                ], 404);
+            }
+        });
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/usuarios/*')) {
+                $id = $request->route('usuario');
+                return response()->json([
+                    "status" => false,
+                    "message" => "No existe el empleado con id: $id"
+                ], 404);
+            }
         });
     }
 }

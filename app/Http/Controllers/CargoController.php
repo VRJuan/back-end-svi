@@ -83,7 +83,7 @@ class CargoController extends Controller
         return response()->json(
             [
                 'status' => true,
-                'message' => 'Se ha actulizado el cargo correctamente'
+                'message' => 'Se ha actulizado el cargo correctamente a: ' . $cargo->fresh()->nombre
             ],
             200
         );

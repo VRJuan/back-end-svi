@@ -12,7 +12,12 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        // query con pagenate para consulta
+        $productos = Producto::select('productos.*', 'categorias.nombre as categorias')
+            ->join('categorias', 'productos.categoria_id', '=', 'categorias.id')
+            ->paginate(10);
+
+        return response()->json($productos);
     }
 
     /**
