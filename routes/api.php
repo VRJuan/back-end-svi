@@ -24,8 +24,6 @@ use App\Http\Controllers\ProductoController;
 // });
 Route::post('auth/registrar', [AuthController::class, 'crearUsuario']);
 Route::post('auth/iniciarsesion', [AuthController::class, 'loginUsuario']);
-Route::resource('productos', ProductoController::class);
-
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -35,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('usuariosporcargo', [UsuarioController::class, 'UsuariosPorCargo']);
     Route::get('auth/cerrarsesion', [AuthController::class, 'cerrarSesionUsuario']);
     Route::resource('categorias', CategoriaController::class);
+    Route::resource('productos', ProductoController::class);
+    Route::get('todoslosproductos', [ProductoController::class, 'todosLosProductos']);
 });
 
 

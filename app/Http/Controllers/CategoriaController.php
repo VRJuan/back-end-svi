@@ -45,7 +45,8 @@ class CategoriaController extends Controller
         return response()->json(
             [
                 'status' => true,
-                'message' => 'Se ha creado la categoria: ' . $categoria->fresh()->nombre . ' Correctamente'
+                'message' => 'Se ha creado la categoria: ' . $categoria->fresh()->nombre . ' Correctamente',
+                'id' => $categoria->fresh()->id
             ],
             200
         );
@@ -79,11 +80,14 @@ class CategoriaController extends Controller
                 200
             );
         }
+        $categoriaSinActualizar = $categoria->fresh()->nombre;
         $categoria->update($request->input());
         return response()->json(
             [
                 'status' => true,
-                'message' => 'Se ha actulizado correctamente la categoria: ' . $categoria->fresh()->nombre
+                'message' => 'Se actulizo correctamente la categoria',
+                'log' => 'Se actulizado la categoria:' . $categoriaSinActualizar . ' a ' .
+                    $categoria->fresh()->nombre
             ],
             200
         );
