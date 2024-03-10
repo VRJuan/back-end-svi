@@ -15,7 +15,7 @@ Usar correctamente las versiones indicadas en en el package json
 
 php artisan server
 
-## imporntate
+## importante
 
 Validar el puerto sea el 8000
 
